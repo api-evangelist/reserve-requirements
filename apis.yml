@@ -1,12 +1,18 @@
+aid: reserve-requirements
 name: Reserve Requirements
 description: Reserve Requirements is a specialized technology or methodology in the
   reserve domain that addresses specific technical or business requirements. It provides
   targeted capabilities that help practitioners and organizations solve problems and
   improve outcomes in their area of focus.
-url: null
+type: Index
+url: https://raw.githubusercontent.com/api-evangelist/reserve-requirements/refs/heads/main/apis.yml
 tags:
 - Reserve Requirements
-created: '2025'
-modified: '2025'
+created: '2025-01-01'
+modified: '2026-03-16'
+specificationVersion: '0.19'
 apis: []
 common: []
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
