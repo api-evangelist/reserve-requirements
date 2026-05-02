@@ -1,0 +1,90 @@
+rules:
+  fred-api-key-required:
+    description: All FRED API operations must include the api_key parameter.
+    message: Operation should document the api_key query parameter.
+    severity: error
+    given: $.paths[*][get,post]
+    then:
+      field: parameters
+      function: truthy
+
+  fred-operation-id:
+    description: All operations must have an operationId.
+    message: Operation is missing operationId.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: operationId
+      function: truthy
+
+  fred-operation-summary:
+    description: All operations must have a summary.
+    message: Operation is missing a summary.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: summary
+      function: truthy
+
+  fred-operation-tags:
+    description: All operations must have at least one tag.
+    message: Operation is missing tags.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: tags
+      function: truthy
+
+  fred-file-type-param:
+    description: All FRED operations should support file_type parameter.
+    message: Operation should document file_type query parameter.
+    severity: info
+    given: $.paths[*][get]
+    then:
+      field: parameters
+      function: truthy
+
+  fred-response-200:
+    description: All GET operations should have a 200 success response.
+    message: GET operation should have a 200 response.
+    severity: error
+    given: $.paths[*].get
+    then:
+      field: responses.200
+      function: truthy
+
+  fred-response-schema:
+    description: Success responses should reference a schema.
+    message: 200 response should include a content schema.
+    severity: warn
+    given: $.paths[*].get.responses['200'].content
+    then:
+      function: truthy
+
+  fred-json-content-type:
+    description: All responses should support application/json.
+    message: Response should include application/json content type.
+    severity: warn
+    given: $.paths[*][*].responses['200'].content
+    then:
+      field: application/json
+      function: truthy
+
+  fred-tags-title-case:
+    description: All tags must use Title Case.
+    message: Tag name should use Title Case.
+    severity: warn
+    given: $.tags[*].name
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[A-Z][A-Za-z ]*$'
+
+  fred-series-id-described:
+    description: series_id parameters should have descriptions with example FRED series IDs.
+    message: series_id parameter should be well described.
+    severity: info
+    given: $.paths[*][*].parameters[?(@.name == 'series_id')]
+    then:
+      field: description
+      function: truthy

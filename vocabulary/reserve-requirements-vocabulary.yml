@@ -1,0 +1,121 @@
+vocabulary:
+  name: Reserve Requirements Vocabulary
+  description: Domain vocabulary for Federal Reserve reserve requirements policy and FRED economic data API.
+  version: "1.0"
+  created: "2026-05-02"
+  terms:
+    - term: ReserveRequirements
+      definition: >-
+        The minimum amount of funds that a depository institution must hold in
+        reserve against specific deposit liabilities. As of March 26, 2020, the
+        Federal Reserve reduced all reserve requirement ratios to zero percent.
+      related: ["RegulationD", "depositoryInstitution"]
+
+    - term: RegulationD
+      definition: >-
+        Federal Reserve Regulation D (12 CFR Part 204) governing reserve
+        requirements for depository institutions. Defines transaction accounts,
+        nonpersonal time deposits, and Eurocurrency liabilities subject to
+        reserve requirements.
+      related: ["reserveRequirements", "Federal Reserve"]
+
+    - term: ReserveRequirementRatio
+      definition: >-
+        The percentage of deposits a bank must hold in reserve. Currently set
+        at 0% for all liability types as of March 2020.
+      values:
+        - "0% - Net transaction accounts (current)"
+        - "0% - Nonpersonal time deposits (current)"
+        - "0% - Eurocurrency liabilities (current)"
+      related: ["reserveRequirements"]
+
+    - term: ReserveExemptionAmount
+      definition: >-
+        The amount of net transaction accounts exempt from reserve requirements
+        (annually indexed). For 2026: $39.2 million.
+      related: ["reserveRequirements", "RegulationD"]
+
+    - term: LowReserveTranche
+      definition: >-
+        The amount of net transaction accounts subject to the low reserve
+        requirement ratio (annually indexed). For 2026: $674.1 million.
+      related: ["reserveRequirements", "RegulationD"]
+
+    - term: DepositoryInstitution
+      definition: >-
+        A financial institution (bank, credit union, savings institution) that
+        accepts deposits and is subject to Federal Reserve reserve requirements.
+      related: ["reserveRequirements"]
+
+    - term: MonetaryBase
+      definition: >-
+        The total amount of currency in circulation plus commercial bank reserves
+        held at the central bank. Tracked by the FRED series BOGMBASE.
+      related: ["reserveBalances", "FRED"]
+
+    - term: ReserveBalance
+      definition: >-
+        Funds held by depository institutions at Federal Reserve Banks. Tracked
+        by the FRED series RESBALNS (Reserve Balances with Federal Reserve Banks,
+        Not Seasonally Adjusted).
+      related: ["monetaryBase", "FRED"]
+
+    - term: FRED
+      definition: >-
+        Federal Reserve Economic Data - the St. Louis Federal Reserve's database
+        of economic time series data, accessible via API at api.stlouisfed.org/fred.
+      related: ["API", "economicData"]
+
+    - term: TimeSeries
+      definition: >-
+        A sequence of data observations for an economic variable recorded at
+        uniform time intervals. FRED hosts over 800,000 economic time series.
+      properties:
+        - series_id
+        - title
+        - frequency
+        - units
+        - seasonal_adjustment
+        - observation_start
+        - observation_end
+      related: ["FRED", "observation"]
+
+    - term: Observation
+      definition: >-
+        A single data point in a FRED time series, consisting of a date and
+        value. Missing values are represented by a period (.).
+      properties:
+        - date
+        - value
+        - realtime_start
+        - realtime_end
+      related: ["timeSeries", "FRED"]
+
+    - term: H3Release
+      definition: >-
+        The Federal Reserve's "Aggregate Reserves of Depository Institutions
+        and the Monetary Base" statistical release. Discontinued September 2020;
+        data folded into the H.6 release.
+      related: ["H6Release", "monetaryBase"]
+
+    - term: H6Release
+      definition: >-
+        The Federal Reserve's "Money Stock Measures" statistical release,
+        which absorbed H.3 data after September 2020. Tracks M1, M2, and
+        reserve balance components.
+      related: ["H3Release", "monetaryBase"]
+
+    - term: SeasonalAdjustment
+      definition: >-
+        A statistical technique that removes recurring seasonal patterns from
+        data to reveal underlying trends.
+      values:
+        - "Seasonally Adjusted (SA)"
+        - "Not Seasonally Adjusted (NSA)"
+      related: ["timeSeries"]
+
+    - term: RealtimePeriod
+      definition: >-
+        The date range indicating when a particular data value was the most
+        recently available vintage. Used by FRED to track data revisions.
+      related: ["observation", "FRED"]

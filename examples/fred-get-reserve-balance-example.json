@@ -1,0 +1,40 @@
+{
+  "title": "Get Reserve Balances with Federal Reserve Banks",
+  "description": "Example FRED API request to retrieve reserve balance data (series RESBALNS) observations",
+  "request": {
+    "method": "GET",
+    "url": "https://api.stlouisfed.org/fred/series/observations?series_id=RESBALNS&observation_start=2024-01-01&observation_end=2024-12-31&sort_order=desc&file_type=json&api_key=YOUR_API_KEY"
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "realtime_start": "2026-05-02",
+      "realtime_end": "2026-05-02",
+      "observation_start": "2024-01-01",
+      "observation_end": "2024-12-31",
+      "units": "lin",
+      "output_type": 1,
+      "file_type": "json",
+      "order_by": "observation_date",
+      "sort_order": "desc",
+      "count": 52,
+      "offset": 0,
+      "limit": 100000,
+      "observations": [
+        {
+          "realtime_start": "2026-05-02",
+          "realtime_end": "2026-05-02",
+          "date": "2024-12-25",
+          "value": "3459214"
+        },
+        {
+          "realtime_start": "2026-05-02",
+          "realtime_end": "2026-05-02",
+          "date": "2024-12-18",
+          "value": "3521087"
+        }
+      ]
+    }
+  },
+  "notes": "RESBALNS = Reserve Balances with Federal Reserve Banks, Not Adjusted. Values in Millions of Dollars. Reserve requirement ratios are currently 0% as of March 2020."
+}

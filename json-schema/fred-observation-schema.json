@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/reserve-requirements/json-schema/fred-observation-schema.json",
+  "title": "FRED Economic Data Observation",
+  "description": "JSON Schema for a single FRED data observation (data point) in an economic time series.",
+  "type": "object",
+  "properties": {
+    "realtime_start": {
+      "type": "string",
+      "format": "date",
+      "description": "Realtime start date for this observation."
+    },
+    "realtime_end": {
+      "type": "string",
+      "format": "date",
+      "description": "Realtime end date for this observation."
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "The observation date.",
+      "example": "2024-01-03"
+    },
+    "value": {
+      "type": "string",
+      "description": "The observation value. A period (.) indicates a missing value.",
+      "example": "3459214"
+    }
+  },
+  "required": ["date", "value"]
+}

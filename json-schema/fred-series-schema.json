@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/reserve-requirements/json-schema/fred-series-schema.json",
+  "title": "FRED Economic Data Series",
+  "description": "JSON Schema for a FRED (Federal Reserve Economic Data) time series object. Key reserve-related series include RESBALNS (reserve balances with Federal Reserve Banks), BOGMBASE (monetary base), and WRESBAL (reserve balances).",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Series ID (e.g., RESBALNS, BOGMBASE, WRESBAL).",
+      "example": "RESBALNS"
+    },
+    "realtime_start": {
+      "type": "string",
+      "format": "date",
+      "description": "Realtime start date."
+    },
+    "realtime_end": {
+      "type": "string",
+      "format": "date",
+      "description": "Realtime end date."
+    },
+    "title": {
+      "type": "string",
+      "description": "Series title.",
+      "example": "Reserve Balances with Federal Reserve Banks"
+    },
+    "observation_start": {
+      "type": "string",
+      "format": "date",
+      "description": "Start date of available observations."
+    },
+    "observation_end": {
+      "type": "string",
+      "format": "date",
+      "description": "End date of available observations."
+    },
+    "frequency": {
+      "type": "string",
+      "description": "Data frequency.",
+      "example": "Weekly, Ending Wednesday"
+    },
+    "frequency_short": {
+      "type": "string",
+      "description": "Short frequency code.",
+      "example": "W"
+    },
+    "units": {
+      "type": "string",
+      "description": "Data units.",
+      "example": "Millions of Dollars"
+    },
+    "units_short": {
+      "type": "string",
+      "description": "Short units description.",
+      "example": "Mil. of $"
+    },
+    "seasonal_adjustment": {
+      "type": "string",
+      "description": "Seasonal adjustment status.",
+      "example": "Not Seasonally Adjusted"
+    },
+    "seasonal_adjustment_short": {
+      "type": "string",
+      "description": "Short seasonal adjustment code.",
+      "example": "NSA"
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last update timestamp."
+    },
+    "popularity": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Popularity score (0-100)."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Series notes and descriptions."
+    }
+  },
+  "required": ["id", "title", "frequency", "units", "observation_start", "observation_end"]
+}

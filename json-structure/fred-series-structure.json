@@ -1,0 +1,21 @@
+{
+  "name": "FRED Economic Data Series",
+  "description": "JSON structure for a FRED (Federal Reserve Economic Data) time series.",
+  "fields": [
+    { "name": "id", "type": "string", "description": "Series identifier (e.g., RESBALNS, BOGMBASE)." },
+    { "name": "title", "type": "string", "description": "Human-readable series title." },
+    { "name": "observation_start", "type": "date", "description": "Earliest available data date." },
+    { "name": "observation_end", "type": "date", "description": "Latest available data date." },
+    { "name": "frequency", "type": "string", "description": "Data frequency (Daily, Weekly, Monthly, etc.)." },
+    { "name": "frequency_short", "type": "string", "description": "Short frequency code." },
+    { "name": "units", "type": "string", "description": "Units of measurement." },
+    { "name": "units_short", "type": "string", "description": "Short units label." },
+    { "name": "seasonal_adjustment", "type": "string", "description": "Seasonal adjustment status." },
+    { "name": "seasonal_adjustment_short", "type": "string", "description": "Short seasonal adjustment code." },
+    { "name": "last_updated", "type": "date-time", "description": "Last data update timestamp." },
+    { "name": "popularity", "type": "integer", "description": "Series popularity score (0-100)." },
+    { "name": "notes", "type": "string", "description": "Detailed series methodology notes." },
+    { "name": "realtime_start", "type": "date", "description": "Realtime period start." },
+    { "name": "realtime_end", "type": "date", "description": "Realtime period end." }
+  ]
+}
