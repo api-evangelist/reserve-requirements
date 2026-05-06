@@ -1,0 +1,511 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: FRED API - Federal Reserve Economic Data
+  description: The Federal Reserve Economic Data (FRED) API provided by the Federal Reserve Bank of St. Louis offers programmatic
+    access to over 800,000 economic time series including reserve requirement data, monetary base measures, H.6 Money Stock
+    Measures, and historical aggregate reserve data from the discontinued H.3 release. The API uses API key authentication
+    and returns data in JSON, XML, or other formats.
+  tags:
+  - Reserve
+  - Requirements
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: reserve-requirements
+    baseUri: https://api.stlouisfed.org/fred
+    description: FRED API - Federal Reserve Economic Data HTTP API.
+    authentication:
+      type: apikey
+      in: query
+      name: api_key
+      value: '{{RESERVE_REQUIREMENTS_TOKEN}}'
+    resources:
+    - name: series
+      path: /series
+      operations:
+      - name: getseries
+        method: GET
+        description: Get Economic Series
+        inputParameters:
+        - name: series_id
+          in: query
+          type: string
+          required: true
+          description: The FRED series ID (e.g., RESBALNS, BOGMBASE).
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: series-observations
+      path: /series/observations
+      operations:
+      - name: getseriesobservations
+        method: GET
+        description: Get Series Observations
+        inputParameters:
+        - name: series_id
+          in: query
+          type: string
+          required: true
+          description: The FRED series ID.
+        - name: observation_start
+          in: query
+          type: string
+          description: Start date for observations (YYYY-MM-DD).
+        - name: observation_end
+          in: query
+          type: string
+          description: End date for observations (YYYY-MM-DD).
+        - name: sort_order
+          in: query
+          type: string
+          description: Sort order for observations.
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of observations to return.
+        - name: offset
+          in: query
+          type: integer
+          description: Offset for pagination.
+        - name: units
+          in: query
+          type: string
+          description: Units transformation for the data.
+        - name: frequency
+          in: query
+          type: string
+          description: Frequency of the data.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: series-search
+      path: /series/search
+      operations:
+      - name: searchseries
+        method: GET
+        description: Search Series
+        inputParameters:
+        - name: search_text
+          in: query
+          type: string
+          required: true
+          description: Search keywords (e.g., "reserve requirements", "monetary base").
+        - name: search_type
+          in: query
+          type: string
+          description: Type of search to perform.
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of results.
+        - name: offset
+          in: query
+          type: integer
+          description: Offset for pagination.
+        - name: order_by
+          in: query
+          type: string
+          description: Field to order results by.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: category
+      path: /category
+      operations:
+      - name: getcategory
+        method: GET
+        description: Get Category
+        inputParameters:
+        - name: category_id
+          in: query
+          type: integer
+          required: true
+          description: The category ID (e.g., 32217 for Reserve Requirements).
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: category-series
+      path: /category/series
+      operations:
+      - name: getcategoryseries
+        method: GET
+        description: Get Category Series
+        inputParameters:
+        - name: category_id
+          in: query
+          type: integer
+          required: true
+          description: The category ID.
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of results.
+        - name: offset
+          in: query
+          type: integer
+          description: Offset for pagination.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: releases
+      path: /releases
+      operations:
+      - name: listreleases
+        method: GET
+        description: List Releases
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of results.
+        - name: offset
+          in: query
+          type: integer
+          description: Offset for pagination.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: release
+      path: /release
+      operations:
+      - name: getrelease
+        method: GET
+        description: Get Release
+        inputParameters:
+        - name: release_id
+          in: query
+          type: integer
+          required: true
+          description: The release ID.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: release-series
+      path: /release/series
+      operations:
+      - name: getreleaseseries
+        method: GET
+        description: Get Release Series
+        inputParameters:
+        - name: release_id
+          in: query
+          type: integer
+          required: true
+          description: The release ID.
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of results.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: reserve-requirements-rest
+    description: REST adapter for FRED API - Federal Reserve Economic Data.
+    resources:
+    - path: /series
+      name: getseries
+      operations:
+      - method: GET
+        name: getseries
+        description: Get Economic Series
+        call: reserve-requirements.getseries
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /series/observations
+      name: getseriesobservations
+      operations:
+      - method: GET
+        name: getseriesobservations
+        description: Get Series Observations
+        call: reserve-requirements.getseriesobservations
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /series/search
+      name: searchseries
+      operations:
+      - method: GET
+        name: searchseries
+        description: Search Series
+        call: reserve-requirements.searchseries
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /category
+      name: getcategory
+      operations:
+      - method: GET
+        name: getcategory
+        description: Get Category
+        call: reserve-requirements.getcategory
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /category/series
+      name: getcategoryseries
+      operations:
+      - method: GET
+        name: getcategoryseries
+        description: Get Category Series
+        call: reserve-requirements.getcategoryseries
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /releases
+      name: listreleases
+      operations:
+      - method: GET
+        name: listreleases
+        description: List Releases
+        call: reserve-requirements.listreleases
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /release
+      name: getrelease
+      operations:
+      - method: GET
+        name: getrelease
+        description: Get Release
+        call: reserve-requirements.getrelease
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /release/series
+      name: getreleaseseries
+      operations:
+      - method: GET
+        name: getreleaseseries
+        description: Get Release Series
+        call: reserve-requirements.getreleaseseries
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: reserve-requirements-mcp
+    transport: http
+    description: MCP adapter for FRED API - Federal Reserve Economic Data for AI agent use.
+    tools:
+    - name: getseries
+      description: Get Economic Series
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reserve-requirements.getseries
+      with:
+        series_id: tools.series_id
+      inputParameters:
+      - name: series_id
+        type: string
+        description: The FRED series ID (e.g., RESBALNS, BOGMBASE).
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getseriesobservations
+      description: Get Series Observations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reserve-requirements.getseriesobservations
+      with:
+        series_id: tools.series_id
+        observation_start: tools.observation_start
+        observation_end: tools.observation_end
+        sort_order: tools.sort_order
+        limit: tools.limit
+        offset: tools.offset
+        units: tools.units
+        frequency: tools.frequency
+      inputParameters:
+      - name: series_id
+        type: string
+        description: The FRED series ID.
+        required: true
+      - name: observation_start
+        type: string
+        description: Start date for observations (YYYY-MM-DD).
+      - name: observation_end
+        type: string
+        description: End date for observations (YYYY-MM-DD).
+      - name: sort_order
+        type: string
+        description: Sort order for observations.
+      - name: limit
+        type: integer
+        description: Maximum number of observations to return.
+      - name: offset
+        type: integer
+        description: Offset for pagination.
+      - name: units
+        type: string
+        description: Units transformation for the data.
+      - name: frequency
+        type: string
+        description: Frequency of the data.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: searchseries
+      description: Search Series
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reserve-requirements.searchseries
+      with:
+        search_text: tools.search_text
+        search_type: tools.search_type
+        limit: tools.limit
+        offset: tools.offset
+        order_by: tools.order_by
+      inputParameters:
+      - name: search_text
+        type: string
+        description: Search keywords (e.g., "reserve requirements", "monetary base").
+        required: true
+      - name: search_type
+        type: string
+        description: Type of search to perform.
+      - name: limit
+        type: integer
+        description: Maximum number of results.
+      - name: offset
+        type: integer
+        description: Offset for pagination.
+      - name: order_by
+        type: string
+        description: Field to order results by.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getcategory
+      description: Get Category
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reserve-requirements.getcategory
+      with:
+        category_id: tools.category_id
+      inputParameters:
+      - name: category_id
+        type: integer
+        description: The category ID (e.g., 32217 for Reserve Requirements).
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getcategoryseries
+      description: Get Category Series
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reserve-requirements.getcategoryseries
+      with:
+        category_id: tools.category_id
+        limit: tools.limit
+        offset: tools.offset
+      inputParameters:
+      - name: category_id
+        type: integer
+        description: The category ID.
+        required: true
+      - name: limit
+        type: integer
+        description: Maximum number of results.
+      - name: offset
+        type: integer
+        description: Offset for pagination.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listreleases
+      description: List Releases
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reserve-requirements.listreleases
+      with:
+        limit: tools.limit
+        offset: tools.offset
+      inputParameters:
+      - name: limit
+        type: integer
+        description: Maximum number of results.
+      - name: offset
+        type: integer
+        description: Offset for pagination.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getrelease
+      description: Get Release
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reserve-requirements.getrelease
+      with:
+        release_id: tools.release_id
+      inputParameters:
+      - name: release_id
+        type: integer
+        description: The release ID.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getreleaseseries
+      description: Get Release Series
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reserve-requirements.getreleaseseries
+      with:
+        release_id: tools.release_id
+        limit: tools.limit
+      inputParameters:
+      - name: release_id
+        type: integer
+        description: The release ID.
+        required: true
+      - name: limit
+        type: integer
+        description: Maximum number of results.
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    RESERVE_REQUIREMENTS_TOKEN: RESERVE_REQUIREMENTS_TOKEN
