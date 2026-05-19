@@ -1,0 +1,136 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: FRED API - Federal Reserve Economic Data — Categories
+  description: 'FRED API - Federal Reserve Economic Data — Categories. 2 operations. Lead operation: Get Category. Self-contained
+    Naftiko capability covering one Reserve Requirements business surface.'
+  tags:
+  - Reserve Requirements
+  - Categories
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    RESERVE_REQUIREMENTS_API_KEY: RESERVE_REQUIREMENTS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: fred-categories
+    baseUri: https://api.stlouisfed.org/fred
+    description: FRED API - Federal Reserve Economic Data — Categories business capability. Self-contained, no shared references.
+    resources:
+    - name: category
+      path: /category
+      operations:
+      - name: getcategory
+        method: GET
+        description: Get Category
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: category_id
+          in: query
+          type: integer
+          description: The category ID (e.g., 32217 for Reserve Requirements).
+          required: true
+    - name: category-series
+      path: /category/series
+      operations:
+      - name: getcategoryseries
+        method: GET
+        description: Get Category Series
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: category_id
+          in: query
+          type: integer
+          description: The category ID.
+          required: true
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of results.
+        - name: offset
+          in: query
+          type: integer
+          description: Offset for pagination.
+    authentication:
+      type: apikey
+      key: api_key
+      value: '{{env.RESERVE_REQUIREMENTS_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: fred-categories-rest
+    port: 8080
+    description: REST adapter for FRED API - Federal Reserve Economic Data — Categories. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/category
+      name: category
+      description: REST surface for category.
+      operations:
+      - method: GET
+        name: getcategory
+        description: Get Category
+        call: fred-categories.getcategory
+        with:
+          category_id: rest.category_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/category/series
+      name: category-series
+      description: REST surface for category-series.
+      operations:
+      - method: GET
+        name: getcategoryseries
+        description: Get Category Series
+        call: fred-categories.getcategoryseries
+        with:
+          category_id: rest.category_id
+          limit: rest.limit
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: fred-categories-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for FRED API - Federal Reserve Economic Data — Categories. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: get-category
+      description: Get Category
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: fred-categories.getcategory
+      with:
+        category_id: tools.category_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-category-series
+      description: Get Category Series
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: fred-categories.getcategoryseries
+      with:
+        category_id: tools.category_id
+        limit: tools.limit
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.

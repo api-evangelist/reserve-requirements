@@ -1,0 +1,124 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: FRED API - Federal Reserve Economic Data — Observations
+  description: 'FRED API - Federal Reserve Economic Data — Observations. 1 operations. Lead operation: Get Series Observations.
+    Self-contained Naftiko capability covering one Reserve Requirements business surface.'
+  tags:
+  - Reserve Requirements
+  - Observations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    RESERVE_REQUIREMENTS_API_KEY: RESERVE_REQUIREMENTS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: fred-observations
+    baseUri: https://api.stlouisfed.org/fred
+    description: FRED API - Federal Reserve Economic Data — Observations business capability. Self-contained, no shared references.
+    resources:
+    - name: series-observations
+      path: /series/observations
+      operations:
+      - name: getseriesobservations
+        method: GET
+        description: Get Series Observations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: series_id
+          in: query
+          type: string
+          description: The FRED series ID.
+          required: true
+        - name: observation_start
+          in: query
+          type: string
+          description: Start date for observations (YYYY-MM-DD).
+        - name: observation_end
+          in: query
+          type: string
+          description: End date for observations (YYYY-MM-DD).
+        - name: sort_order
+          in: query
+          type: string
+          description: Sort order for observations.
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of observations to return.
+        - name: offset
+          in: query
+          type: integer
+          description: Offset for pagination.
+        - name: units
+          in: query
+          type: string
+          description: Units transformation for the data.
+        - name: frequency
+          in: query
+          type: string
+          description: Frequency of the data.
+    authentication:
+      type: apikey
+      key: api_key
+      value: '{{env.RESERVE_REQUIREMENTS_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: fred-observations-rest
+    port: 8080
+    description: REST adapter for FRED API - Federal Reserve Economic Data — Observations. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/series/observations
+      name: series-observations
+      description: REST surface for series-observations.
+      operations:
+      - method: GET
+        name: getseriesobservations
+        description: Get Series Observations
+        call: fred-observations.getseriesobservations
+        with:
+          series_id: rest.series_id
+          observation_start: rest.observation_start
+          observation_end: rest.observation_end
+          sort_order: rest.sort_order
+          limit: rest.limit
+          offset: rest.offset
+          units: rest.units
+          frequency: rest.frequency
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: fred-observations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for FRED API - Federal Reserve Economic Data — Observations. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: get-series-observations
+      description: Get Series Observations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: fred-observations.getseriesobservations
+      with:
+        series_id: tools.series_id
+        observation_start: tools.observation_start
+        observation_end: tools.observation_end
+        sort_order: tools.sort_order
+        limit: tools.limit
+        offset: tools.offset
+        units: tools.units
+        frequency: tools.frequency
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,148 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: FRED API - Federal Reserve Economic Data — Series
+  description: 'FRED API - Federal Reserve Economic Data — Series. 2 operations. Lead operation: Get Economic Series. Self-contained
+    Naftiko capability covering one Reserve Requirements business surface.'
+  tags:
+  - Reserve Requirements
+  - Series
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    RESERVE_REQUIREMENTS_API_KEY: RESERVE_REQUIREMENTS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: fred-series
+    baseUri: https://api.stlouisfed.org/fred
+    description: FRED API - Federal Reserve Economic Data — Series business capability. Self-contained, no shared references.
+    resources:
+    - name: series
+      path: /series
+      operations:
+      - name: getseries
+        method: GET
+        description: Get Economic Series
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: series_id
+          in: query
+          type: string
+          description: The FRED series ID (e.g., RESBALNS, BOGMBASE).
+          required: true
+    - name: series-search
+      path: /series/search
+      operations:
+      - name: searchseries
+        method: GET
+        description: Search Series
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: search_text
+          in: query
+          type: string
+          description: Search keywords (e.g., "reserve requirements", "monetary base").
+          required: true
+        - name: search_type
+          in: query
+          type: string
+          description: Type of search to perform.
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of results.
+        - name: offset
+          in: query
+          type: integer
+          description: Offset for pagination.
+        - name: order_by
+          in: query
+          type: string
+          description: Field to order results by.
+    authentication:
+      type: apikey
+      key: api_key
+      value: '{{env.RESERVE_REQUIREMENTS_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: fred-series-rest
+    port: 8080
+    description: REST adapter for FRED API - Federal Reserve Economic Data — Series. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/series
+      name: series
+      description: REST surface for series.
+      operations:
+      - method: GET
+        name: getseries
+        description: Get Economic Series
+        call: fred-series.getseries
+        with:
+          series_id: rest.series_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/series/search
+      name: series-search
+      description: REST surface for series-search.
+      operations:
+      - method: GET
+        name: searchseries
+        description: Search Series
+        call: fred-series.searchseries
+        with:
+          search_text: rest.search_text
+          search_type: rest.search_type
+          limit: rest.limit
+          offset: rest.offset
+          order_by: rest.order_by
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: fred-series-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for FRED API - Federal Reserve Economic Data — Series. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: get-economic-series
+      description: Get Economic Series
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: fred-series.getseries
+      with:
+        series_id: tools.series_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: search-series
+      description: Search Series
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: fred-series.searchseries
+      with:
+        search_text: tools.search_text
+        search_type: tools.search_type
+        limit: tools.limit
+        offset: tools.offset
+        order_by: tools.order_by
+      outputParameters:
+      - type: object
+        mapping: $.
