@@ -1,0 +1,1231 @@
+{
+  "item": [
+    {
+      "id": "9035bb7b-07cb-4b57-b7ae-24e612d28c5f",
+      "name": "Series",
+      "description": {
+        "content": "Search and retrieve economic data time series.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "974d3f86-5c1f-4af9-87fa-4a8e269c06b8",
+          "name": "Get Economic Series",
+          "request": {
+            "name": "Get Economic Series",
+            "description": {
+              "content": "Retrieve information for a single FRED economic data series. Key reserve-related series include: RESBALNS (reserve balances), BOGMBASE (monetary base), WRESBAL (weekly reserve balances).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "series"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "series_id",
+                  "value": "<string>",
+                  "description": "(Required) The FRED series ID (e.g., RESBALNS, BOGMBASE)."
+                },
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your FRED API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "file_type",
+                  "value": "json",
+                  "description": "Output file format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "88f10b0d-d7d1-4f91-806c-fe18e1f997ce",
+              "name": "Series metadata.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "series"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "series_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "file_type",
+                      "value": "json"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"realtime_start\": \"string\",\n  \"realtime_end\": \"string\",\n  \"seriess\": [\n    {\n      \"id\": \"string\",\n      \"realtime_start\": \"1961-07-24\",\n      \"realtime_end\": \"1957-05-09\",\n      \"title\": \"string\",\n      \"observation_start\": \"1955-09-19\",\n      \"observation_end\": \"2000-07-02\",\n      \"frequency\": \"string\",\n      \"frequency_short\": \"string\",\n      \"units\": \"string\",\n      \"units_short\": \"string\",\n      \"seasonal_adjustment\": \"string\",\n      \"seasonal_adjustment_short\": \"string\",\n      \"last_updated\": \"1964-02-13T16:30:11.731Z\",\n      \"popularity\": 280,\n      \"notes\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"realtime_start\": \"2018-06-25\",\n      \"realtime_end\": \"1988-08-18\",\n      \"title\": \"string\",\n      \"observation_start\": \"1986-12-02\",\n      \"observation_end\": \"1981-06-14\",\n      \"frequency\": \"string\",\n      \"frequency_short\": \"string\",\n      \"units\": \"string\",\n      \"units_short\": \"string\",\n      \"seasonal_adjustment\": \"string\",\n      \"seasonal_adjustment_short\": \"string\",\n      \"last_updated\": \"1948-12-07T05:26:03.218Z\",\n      \"popularity\": 4865,\n      \"notes\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fbc902b2-4b8d-4dbd-a38e-857346d1d5ca",
+              "name": "Bad request - invalid parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "series"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "series_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "file_type",
+                      "value": "json"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 6820,\n  \"error_message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "55671198-3de6-4c6f-87e1-78a5a0c2adb9",
+          "name": "Search Series",
+          "request": {
+            "name": "Search Series",
+            "description": {
+              "content": "Search for FRED economic data series by keyword.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "series",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search_text",
+                  "value": "<string>",
+                  "description": "(Required) Search keywords (e.g., \"reserve requirements\", \"monetary base\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "search_type",
+                  "value": "full_text",
+                  "description": "Type of search to perform."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "1000",
+                  "description": "Maximum number of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Offset for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Field to order results by."
+                },
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your FRED API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "file_type",
+                  "value": "json",
+                  "description": "Output file format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4edea56c-9461-4a46-9b82-02c62fa9afdc",
+              "name": "Search results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "series",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search_text",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search_type",
+                      "value": "full_text"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "file_type",
+                      "value": "json"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"realtime_start\": \"string\",\n  \"realtime_end\": \"string\",\n  \"order_by\": \"string\",\n  \"sort_order\": \"string\",\n  \"count\": 1367,\n  \"offset\": 5540,\n  \"limit\": 2414,\n  \"seriess\": [\n    {\n      \"id\": \"string\",\n      \"realtime_start\": \"1956-10-22\",\n      \"realtime_end\": \"2022-10-15\",\n      \"title\": \"string\",\n      \"observation_start\": \"1980-07-16\",\n      \"observation_end\": \"1958-08-20\",\n      \"frequency\": \"string\",\n      \"frequency_short\": \"string\",\n      \"units\": \"string\",\n      \"units_short\": \"string\",\n      \"seasonal_adjustment\": \"string\",\n      \"seasonal_adjustment_short\": \"string\",\n      \"last_updated\": \"1987-03-04T16:39:57.868Z\",\n      \"popularity\": 128,\n      \"notes\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"realtime_start\": \"2012-10-15\",\n      \"realtime_end\": \"2003-12-08\",\n      \"title\": \"string\",\n      \"observation_start\": \"1968-12-29\",\n      \"observation_end\": \"1997-11-13\",\n      \"frequency\": \"string\",\n      \"frequency_short\": \"string\",\n      \"units\": \"string\",\n      \"units_short\": \"string\",\n      \"seasonal_adjustment\": \"string\",\n      \"seasonal_adjustment_short\": \"string\",\n      \"last_updated\": \"1998-01-14T22:58:18.413Z\",\n      \"popularity\": 1193,\n      \"notes\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "ea45071c-f5cf-405f-b820-24dd90d82e84",
+      "name": "Observations",
+      "description": {
+        "content": "Retrieve data observations for a series.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1e1ba635-7dbe-430b-b4b2-92acfafb8c89",
+          "name": "Get Series Observations",
+          "request": {
+            "name": "Get Series Observations",
+            "description": {
+              "content": "Retrieve observations (data values) for an economic data series. Supports date filtering, sorting, and multiple output formats.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "series",
+                "observations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "series_id",
+                  "value": "<string>",
+                  "description": "(Required) The FRED series ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "observation_start",
+                  "value": "<date>",
+                  "description": "Start date for observations (YYYY-MM-DD)."
+                },
+                {
+                  "disabled": false,
+                  "key": "observation_end",
+                  "value": "<date>",
+                  "description": "End date for observations (YYYY-MM-DD)."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_order",
+                  "value": "asc",
+                  "description": "Sort order for observations."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100000",
+                  "description": "Maximum number of observations to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Offset for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "units",
+                  "value": "<string>",
+                  "description": "Units transformation for the data."
+                },
+                {
+                  "disabled": false,
+                  "key": "frequency",
+                  "value": "<string>",
+                  "description": "Frequency of the data."
+                },
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your FRED API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "file_type",
+                  "value": "json",
+                  "description": "Output file format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "39e2381c-04d5-460c-9db7-f5a9abce7f3a",
+              "name": "Series observations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "series",
+                    "observations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "series_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "observation_start",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "observation_end",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "units",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "frequency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "file_type",
+                      "value": "json"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"realtime_start\": \"string\",\n  \"realtime_end\": \"string\",\n  \"observation_start\": \"string\",\n  \"observation_end\": \"string\",\n  \"units\": \"string\",\n  \"output_type\": 9117,\n  \"file_type\": \"string\",\n  \"order_by\": \"string\",\n  \"sort_order\": \"string\",\n  \"count\": 6126,\n  \"offset\": 8736,\n  \"limit\": 9191,\n  \"observations\": [\n    {\n      \"realtime_start\": \"1949-03-28\",\n      \"realtime_end\": \"1960-09-19\",\n      \"date\": \"1946-09-09\",\n      \"value\": \"string\"\n    },\n    {\n      \"realtime_start\": \"1977-09-28\",\n      \"realtime_end\": \"2021-12-19\",\n      \"date\": \"1958-06-02\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "febc7021-75cb-4215-8389-e59fd8b2ae6a",
+              "name": "Bad request - invalid parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "series",
+                    "observations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "series_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "observation_start",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "observation_end",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "units",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "frequency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "file_type",
+                      "value": "json"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 6820,\n  \"error_message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "1270ccdc-18cf-4aeb-aa77-2d7d71032b8f",
+      "name": "Categories",
+      "description": {
+        "content": "Browse FRED data categories.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "956b03f6-1cd0-4066-8806-b5cb8699c564",
+          "name": "Get Category",
+          "request": {
+            "name": "Get Category",
+            "description": {
+              "content": "Retrieve a FRED category by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "category"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "category_id",
+                  "value": "<integer>",
+                  "description": "(Required) The category ID (e.g., 32217 for Reserve Requirements)."
+                },
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your FRED API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "file_type",
+                  "value": "json",
+                  "description": "Output file format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2b4c3175-bc45-421d-9f05-8678b312480b",
+              "name": "Category metadata.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "category"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "category_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "file_type",
+                      "value": "json"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"categories\": [\n    {\n      \"id\": 7663,\n      \"name\": \"string\",\n      \"parent_id\": 9715\n    },\n    {\n      \"id\": 6859,\n      \"name\": \"string\",\n      \"parent_id\": 1790\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fecf9bbf-8db6-44df-b152-56c3cb54abe9",
+          "name": "Get Category Series",
+          "request": {
+            "name": "Get Category Series",
+            "description": {
+              "content": "Retrieve all series for a FRED category.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "category",
+                "series"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "category_id",
+                  "value": "<integer>",
+                  "description": "(Required) The category ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "1000",
+                  "description": "Maximum number of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Offset for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your FRED API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "file_type",
+                  "value": "json",
+                  "description": "Output file format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c0cdfbe2-32f6-4c7d-8d88-bde3f265b6e8",
+              "name": "Series in the category.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "category",
+                    "series"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "category_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "file_type",
+                      "value": "json"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"realtime_start\": \"string\",\n  \"realtime_end\": \"string\",\n  \"order_by\": \"string\",\n  \"sort_order\": \"string\",\n  \"count\": 1367,\n  \"offset\": 5540,\n  \"limit\": 2414,\n  \"seriess\": [\n    {\n      \"id\": \"string\",\n      \"realtime_start\": \"1956-10-22\",\n      \"realtime_end\": \"2022-10-15\",\n      \"title\": \"string\",\n      \"observation_start\": \"1980-07-16\",\n      \"observation_end\": \"1958-08-20\",\n      \"frequency\": \"string\",\n      \"frequency_short\": \"string\",\n      \"units\": \"string\",\n      \"units_short\": \"string\",\n      \"seasonal_adjustment\": \"string\",\n      \"seasonal_adjustment_short\": \"string\",\n      \"last_updated\": \"1987-03-04T16:39:57.868Z\",\n      \"popularity\": 128,\n      \"notes\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"realtime_start\": \"2012-10-15\",\n      \"realtime_end\": \"2003-12-08\",\n      \"title\": \"string\",\n      \"observation_start\": \"1968-12-29\",\n      \"observation_end\": \"1997-11-13\",\n      \"frequency\": \"string\",\n      \"frequency_short\": \"string\",\n      \"units\": \"string\",\n      \"units_short\": \"string\",\n      \"seasonal_adjustment\": \"string\",\n      \"seasonal_adjustment_short\": \"string\",\n      \"last_updated\": \"1998-01-14T22:58:18.413Z\",\n      \"popularity\": 1193,\n      \"notes\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "80f8dbfa-1427-49f7-911d-a60b089e7370",
+      "name": "Releases",
+      "description": {
+        "content": "Access Federal Reserve statistical releases.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e5276cc3-ac46-4e16-a022-56ea27f2c49c",
+          "name": "List Releases",
+          "request": {
+            "name": "List Releases",
+            "description": {
+              "content": "Retrieve all Federal Reserve statistical releases.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "releases"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "1000",
+                  "description": "Maximum number of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Offset for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your FRED API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "file_type",
+                  "value": "json",
+                  "description": "Output file format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e0bb4b71-2d5a-4818-b7be-c2ad83b6512b",
+              "name": "List of releases.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "releases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "file_type",
+                      "value": "json"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"realtime_start\": \"string\",\n  \"realtime_end\": \"string\",\n  \"order_by\": \"string\",\n  \"sort_order\": \"string\",\n  \"count\": 4269,\n  \"offset\": 8177,\n  \"limit\": 2059,\n  \"releases\": [\n    {\n      \"id\": 8758,\n      \"realtime_start\": \"string\",\n      \"realtime_end\": \"string\",\n      \"name\": \"string\",\n      \"press_release\": true,\n      \"link\": \"http://XYhiQjgEFCIdZVzcdL.gdCVBg4cNcQ.5oD+cXzidYCGrBuy.2ba8-7F1Y3qSlCbuMtrc\"\n    },\n    {\n      \"id\": 5026,\n      \"realtime_start\": \"string\",\n      \"realtime_end\": \"string\",\n      \"name\": \"string\",\n      \"press_release\": true,\n      \"link\": \"https://URgKiZqmWIxNPR.hpTmRZIJu-ZDPx-dyTdslRjxvWQ-iCwKE17kUEEZ5qKJG\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1f4af8eb-e3ed-4dfb-a3b9-fcbd4d3e8382",
+          "name": "Get Release",
+          "request": {
+            "name": "Get Release",
+            "description": {
+              "content": "Retrieve a specific Federal Reserve statistical release.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "release"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "release_id",
+                  "value": "<integer>",
+                  "description": "(Required) The release ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your FRED API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "file_type",
+                  "value": "json",
+                  "description": "Output file format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1c561b1c-9c90-46cc-8b29-4681f1901882",
+              "name": "Release metadata.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "release"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "release_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "file_type",
+                      "value": "json"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"releases\": [\n    {\n      \"id\": 5767,\n      \"realtime_start\": \"string\",\n      \"realtime_end\": \"string\",\n      \"name\": \"string\",\n      \"press_release\": false,\n      \"link\": \"http://YiNpkbNkHwmLbiVaIucKxpUxXOrSKCBl.vwcHjTHS.Aw\"\n    },\n    {\n      \"id\": 8696,\n      \"realtime_start\": \"string\",\n      \"realtime_end\": \"string\",\n      \"name\": \"string\",\n      \"press_release\": false,\n      \"link\": \"http://fqcemeFbHxcUQLkNXKYhBGyW.duOLV7KC-QHVZ-esy7IcaErvn1szfojB9f\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2d36d673-bd7d-43c0-a5f0-94dbab52130f",
+          "name": "Get Release Series",
+          "request": {
+            "name": "Get Release Series",
+            "description": {
+              "content": "Retrieve all series for a statistical release.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "release",
+                "series"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "release_id",
+                  "value": "<integer>",
+                  "description": "(Required) The release ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "1000",
+                  "description": "Maximum number of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your FRED API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "file_type",
+                  "value": "json",
+                  "description": "Output file format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d5e31867-1c02-4251-b830-5286af7b064b",
+              "name": "Series for the release.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "release",
+                    "series"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "release_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "file_type",
+                      "value": "json"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"realtime_start\": \"string\",\n  \"realtime_end\": \"string\",\n  \"order_by\": \"string\",\n  \"sort_order\": \"string\",\n  \"count\": 1367,\n  \"offset\": 5540,\n  \"limit\": 2414,\n  \"seriess\": [\n    {\n      \"id\": \"string\",\n      \"realtime_start\": \"1956-10-22\",\n      \"realtime_end\": \"2022-10-15\",\n      \"title\": \"string\",\n      \"observation_start\": \"1980-07-16\",\n      \"observation_end\": \"1958-08-20\",\n      \"frequency\": \"string\",\n      \"frequency_short\": \"string\",\n      \"units\": \"string\",\n      \"units_short\": \"string\",\n      \"seasonal_adjustment\": \"string\",\n      \"seasonal_adjustment_short\": \"string\",\n      \"last_updated\": \"1987-03-04T16:39:57.868Z\",\n      \"popularity\": 128,\n      \"notes\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"realtime_start\": \"2012-10-15\",\n      \"realtime_end\": \"2003-12-08\",\n      \"title\": \"string\",\n      \"observation_start\": \"1968-12-29\",\n      \"observation_end\": \"1997-11-13\",\n      \"frequency\": \"string\",\n      \"frequency_short\": \"string\",\n      \"units\": \"string\",\n      \"units_short\": \"string\",\n      \"seasonal_adjustment\": \"string\",\n      \"seasonal_adjustment_short\": \"string\",\n      \"last_updated\": \"1998-01-14T22:58:18.413Z\",\n      \"popularity\": 1193,\n      \"notes\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "1f9956cb-b618-4697-a48b-8c12e8a30d27",
+      "name": "Tags",
+      "description": {
+        "content": "Search series by tags.",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.stlouisfed.org/fred",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1f481017-4980-44f0-ae8f-272c1833449a",
+    "name": "FRED API - Federal Reserve Economic Data",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Federal Reserve Economic Data (FRED) API provided by the Federal Reserve Bank of St. Louis offers programmatic access to over 800,000 economic time series including reserve requirement data, monetary base measures, H.6 Money Stock Measures, and historical aggregate reserve data from the discontinued H.3 release. The API uses API key authentication and returns data in JSON, XML, or other formats.\n\nContact Support:\n Name: Federal Reserve Bank of St. Louis",
+      "type": "text/plain"
+    }
+  }
+}

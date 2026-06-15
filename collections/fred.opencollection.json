@@ -1,0 +1,388 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FRED API - Federal Reserve Economic Data",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Series",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Economic Series",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/fred/series",
+            "params": [
+              {
+                "name": "series_id",
+                "value": "",
+                "type": "query",
+                "description": "The FRED series ID (e.g., RESBALNS, BOGMBASE)."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "",
+                "type": "query",
+                "description": "Output file format."
+              }
+            ]
+          },
+          "docs": "Retrieve information for a single FRED economic data series. Key reserve-related series include: RESBALNS (reserve balances), BOGMBASE (monetary base), WRESBAL (weekly reserve balances)."
+        },
+        {
+          "info": {
+            "name": "Search Series",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/fred/series/search",
+            "params": [
+              {
+                "name": "search_text",
+                "value": "",
+                "type": "query",
+                "description": "Search keywords (e.g., \"reserve requirements\", \"monetary base\")."
+              },
+              {
+                "name": "search_type",
+                "value": "",
+                "type": "query",
+                "description": "Type of search to perform."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset for pagination."
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Field to order results by."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "",
+                "type": "query",
+                "description": "Output file format."
+              }
+            ]
+          },
+          "docs": "Search for FRED economic data series by keyword."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Observations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Series Observations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/fred/series/observations",
+            "params": [
+              {
+                "name": "series_id",
+                "value": "",
+                "type": "query",
+                "description": "The FRED series ID."
+              },
+              {
+                "name": "observation_start",
+                "value": "",
+                "type": "query",
+                "description": "Start date for observations (YYYY-MM-DD)."
+              },
+              {
+                "name": "observation_end",
+                "value": "",
+                "type": "query",
+                "description": "End date for observations (YYYY-MM-DD)."
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for observations."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of observations to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset for pagination."
+              },
+              {
+                "name": "units",
+                "value": "",
+                "type": "query",
+                "description": "Units transformation for the data."
+              },
+              {
+                "name": "frequency",
+                "value": "",
+                "type": "query",
+                "description": "Frequency of the data."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "",
+                "type": "query",
+                "description": "Output file format."
+              }
+            ]
+          },
+          "docs": "Retrieve observations (data values) for an economic data series. Supports date filtering, sorting, and multiple output formats."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Categories",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Category",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/fred/category",
+            "params": [
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "query",
+                "description": "The category ID (e.g., 32217 for Reserve Requirements)."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "",
+                "type": "query",
+                "description": "Output file format."
+              }
+            ]
+          },
+          "docs": "Retrieve a FRED category by ID."
+        },
+        {
+          "info": {
+            "name": "Get Category Series",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/fred/category/series",
+            "params": [
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "query",
+                "description": "The category ID."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset for pagination."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "",
+                "type": "query",
+                "description": "Output file format."
+              }
+            ]
+          },
+          "docs": "Retrieve all series for a FRED category."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Releases",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Releases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/fred/releases",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset for pagination."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "",
+                "type": "query",
+                "description": "Output file format."
+              }
+            ]
+          },
+          "docs": "Retrieve all Federal Reserve statistical releases."
+        },
+        {
+          "info": {
+            "name": "Get Release",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/fred/release",
+            "params": [
+              {
+                "name": "release_id",
+                "value": "",
+                "type": "query",
+                "description": "The release ID."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "",
+                "type": "query",
+                "description": "Output file format."
+              }
+            ]
+          },
+          "docs": "Retrieve a specific Federal Reserve statistical release."
+        },
+        {
+          "info": {
+            "name": "Get Release Series",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/fred/release/series",
+            "params": [
+              {
+                "name": "release_id",
+                "value": "",
+                "type": "query",
+                "description": "The release ID."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "",
+                "type": "query",
+                "description": "Output file format."
+              }
+            ]
+          },
+          "docs": "Retrieve all series for a statistical release."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
