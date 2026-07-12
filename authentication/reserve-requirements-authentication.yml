@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/fred-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: apiKeyQuery
+  type: apiKey
+  in: query
+  parameter: api_key
+  description: FRED API key obtained from api.stlouisfed.org/api/key.html
+  sources:
+  - openapi/fred-openapi.yml
