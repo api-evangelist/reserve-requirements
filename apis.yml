@@ -79,6 +79,8 @@ apis:
       - type: About
         url: https://www.federalreserve.gov/monetarypolicy/reservereq.htm
 common:
+  - type: AgenticAccess
+    url: agentic-access/reserve-requirements-agentic-access.yml
   - type: DomainSecurity
     url: security/reserve-requirements-domain-security.yml
   - type: Authentication
