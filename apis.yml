@@ -1,5 +1,6 @@
 aid: reserve-requirements
 name: Reserve Requirements
+kind: topic
 description: >-
   Reserve Requirements refers to the Federal Reserve's Regulation D framework governing reserve requirement ratios for
   depository institutions. As of March 26, 2020, the Federal Reserve reduced all reserve requirement ratios to zero
