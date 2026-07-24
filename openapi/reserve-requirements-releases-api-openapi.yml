@@ -1,0 +1,250 @@
+openapi: 3.1.0
+info:
+  title: FRED API - Federal Reserve Economic Data Categories Releases API
+  version: 1.0.0
+  description: The Federal Reserve Economic Data (FRED) API provided by the Federal Reserve Bank of St. Louis offers programmatic access to over 800,000 economic time series including reserve requirement data, monetary base measures, H.6 Money Stock Measures, and historical aggregate reserve data from the discontinued H.3 release. The API uses API key authentication and returns data in JSON, XML, or other formats.
+  contact:
+    name: Federal Reserve Bank of St. Louis
+    url: https://fred.stlouisfed.org/
+  license:
+    name: Public Domain
+    url: https://fred.stlouisfed.org/legal/
+servers:
+- url: https://api.stlouisfed.org/fred
+  description: FRED API Production
+security:
+- apiKeyQuery: []
+tags:
+- name: Releases
+  description: Access Federal Reserve statistical releases.
+paths:
+  /releases:
+    get:
+      tags:
+      - Releases
+      summary: List Releases
+      description: Retrieve all Federal Reserve statistical releases.
+      operationId: listReleases
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 1000
+          default: 1000
+        description: Maximum number of results.
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          default: 0
+        description: Offset for pagination.
+      - $ref: '#/components/parameters/apiKeyParam'
+      - $ref: '#/components/parameters/fileTypeParam'
+      responses:
+        '200':
+          description: List of releases.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReleasesResponse'
+  /release:
+    get:
+      tags:
+      - Releases
+      summary: Get Release
+      description: Retrieve a specific Federal Reserve statistical release.
+      operationId: getRelease
+      parameters:
+      - name: release_id
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: The release ID.
+      - $ref: '#/components/parameters/apiKeyParam'
+      - $ref: '#/components/parameters/fileTypeParam'
+      responses:
+        '200':
+          description: Release metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReleaseResponse'
+  /release/series:
+    get:
+      tags:
+      - Releases
+      summary: Get Release Series
+      description: Retrieve all series for a statistical release.
+      operationId: getReleaseSeries
+      parameters:
+      - name: release_id
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: The release ID.
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 1000
+          default: 1000
+        description: Maximum number of results.
+      - $ref: '#/components/parameters/apiKeyParam'
+      - $ref: '#/components/parameters/fileTypeParam'
+      responses:
+        '200':
+          description: Series for the release.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SeriesSearchResponse'
+components:
+  schemas:
+    SeriesSearchResponse:
+      type: object
+      properties:
+        realtime_start:
+          type: string
+        realtime_end:
+          type: string
+        order_by:
+          type: string
+        sort_order:
+          type: string
+        count:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        seriess:
+          type: array
+          items:
+            $ref: '#/components/schemas/Series'
+    Release:
+      type: object
+      properties:
+        id:
+          type: integer
+        realtime_start:
+          type: string
+        realtime_end:
+          type: string
+        name:
+          type: string
+          description: Release name.
+        press_release:
+          type: boolean
+          description: Whether this is a press release.
+        link:
+          type: string
+          format: uri
+          description: Link to the release page.
+    ReleasesResponse:
+      type: object
+      properties:
+        realtime_start:
+          type: string
+        realtime_end:
+          type: string
+        order_by:
+          type: string
+        sort_order:
+          type: string
+        count:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        releases:
+          type: array
+          items:
+            $ref: '#/components/schemas/Release'
+    ReleaseResponse:
+      type: object
+      properties:
+        releases:
+          type: array
+          items:
+            $ref: '#/components/schemas/Release'
+    Series:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Series ID (e.g., RESBALNS).
+        realtime_start:
+          type: string
+          format: date
+          description: Realtime start date.
+        realtime_end:
+          type: string
+          format: date
+          description: Realtime end date.
+        title:
+          type: string
+          description: Series title.
+        observation_start:
+          type: string
+          format: date
+          description: Start date of available observations.
+        observation_end:
+          type: string
+          format: date
+          description: End date of available observations.
+        frequency:
+          type: string
+          description: Data frequency (e.g., Weekly, Monthly).
+        frequency_short:
+          type: string
+          description: Short frequency code.
+        units:
+          type: string
+          description: Data units (e.g., Millions of Dollars).
+        units_short:
+          type: string
+          description: Short units description.
+        seasonal_adjustment:
+          type: string
+          description: Seasonal adjustment status.
+        seasonal_adjustment_short:
+          type: string
+          description: Short seasonal adjustment code.
+        last_updated:
+          type: string
+          format: date-time
+          description: Last update timestamp.
+        popularity:
+          type: integer
+          description: Popularity score (0-100).
+        notes:
+          type: string
+          description: Series notes and descriptions.
+  parameters:
+    apiKeyParam:
+      name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your FRED API key.
+    fileTypeParam:
+      name: file_type
+      in: query
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
+      description: Output file format.
+  securitySchemes:
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: FRED API key obtained from api.stlouisfed.org/api/key.html

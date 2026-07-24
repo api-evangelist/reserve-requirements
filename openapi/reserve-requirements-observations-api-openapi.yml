@@ -1,0 +1,205 @@
+openapi: 3.1.0
+info:
+  title: FRED API - Federal Reserve Economic Data Categories Observations API
+  version: 1.0.0
+  description: The Federal Reserve Economic Data (FRED) API provided by the Federal Reserve Bank of St. Louis offers programmatic access to over 800,000 economic time series including reserve requirement data, monetary base measures, H.6 Money Stock Measures, and historical aggregate reserve data from the discontinued H.3 release. The API uses API key authentication and returns data in JSON, XML, or other formats.
+  contact:
+    name: Federal Reserve Bank of St. Louis
+    url: https://fred.stlouisfed.org/
+  license:
+    name: Public Domain
+    url: https://fred.stlouisfed.org/legal/
+servers:
+- url: https://api.stlouisfed.org/fred
+  description: FRED API Production
+security:
+- apiKeyQuery: []
+tags:
+- name: Observations
+  description: Retrieve data observations for a series.
+paths:
+  /series/observations:
+    get:
+      tags:
+      - Observations
+      summary: Get Series Observations
+      description: Retrieve observations (data values) for an economic data series. Supports date filtering, sorting, and multiple output formats.
+      operationId: getSeriesObservations
+      parameters:
+      - name: series_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The FRED series ID.
+      - name: observation_start
+        in: query
+        schema:
+          type: string
+          format: date
+        description: Start date for observations (YYYY-MM-DD).
+      - name: observation_end
+        in: query
+        schema:
+          type: string
+          format: date
+        description: End date for observations (YYYY-MM-DD).
+      - name: sort_order
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: asc
+        description: Sort order for observations.
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 100000
+          default: 100000
+        description: Maximum number of observations to return.
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          default: 0
+        description: Offset for pagination.
+      - name: units
+        in: query
+        schema:
+          type: string
+          enum:
+          - lin
+          - chg
+          - ch1
+          - pch
+          - pc1
+          - pca
+          - cch
+          - cca
+          - log
+        description: Units transformation for the data.
+      - name: frequency
+        in: query
+        schema:
+          type: string
+          enum:
+          - d
+          - w
+          - bw
+          - m
+          - q
+          - sa
+          - a
+          - wef
+          - weth
+          - wew
+          - wetu
+          - wem
+          - wesu
+          - wesa
+          - bwew
+          - bwem
+        description: Frequency of the data.
+      - $ref: '#/components/parameters/apiKeyParam'
+      - $ref: '#/components/parameters/fileTypeParam'
+      responses:
+        '200':
+          description: Series observations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObservationsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+components:
+  parameters:
+    apiKeyParam:
+      name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your FRED API key.
+    fileTypeParam:
+      name: file_type
+      in: query
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
+      description: Output file format.
+  schemas:
+    ObservationsResponse:
+      type: object
+      properties:
+        realtime_start:
+          type: string
+        realtime_end:
+          type: string
+        observation_start:
+          type: string
+        observation_end:
+          type: string
+        units:
+          type: string
+        output_type:
+          type: integer
+        file_type:
+          type: string
+        order_by:
+          type: string
+        sort_order:
+          type: string
+        count:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        observations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Observation'
+    ErrorResponse:
+      type: object
+      properties:
+        error_code:
+          type: integer
+          description: FRED error code.
+        error_message:
+          type: string
+          description: Human-readable error message.
+    Observation:
+      type: object
+      properties:
+        realtime_start:
+          type: string
+          format: date
+        realtime_end:
+          type: string
+          format: date
+        date:
+          type: string
+          format: date
+          description: Observation date.
+        value:
+          type: string
+          description: Observation value (period value or "." for missing).
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: FRED API key obtained from api.stlouisfed.org/api/key.html
