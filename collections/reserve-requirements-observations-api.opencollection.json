@@ -1,0 +1,99 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FRED API - Federal Reserve Economic Data Categories Observations API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Observations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Series Observations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/fred/series/observations",
+            "params": [
+              {
+                "name": "series_id",
+                "value": "",
+                "type": "query",
+                "description": "The FRED series ID."
+              },
+              {
+                "name": "observation_start",
+                "value": "",
+                "type": "query",
+                "description": "Start date for observations (YYYY-MM-DD)."
+              },
+              {
+                "name": "observation_end",
+                "value": "",
+                "type": "query",
+                "description": "End date for observations (YYYY-MM-DD)."
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for observations."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of observations to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset for pagination."
+              },
+              {
+                "name": "units",
+                "value": "",
+                "type": "query",
+                "description": "Units transformation for the data."
+              },
+              {
+                "name": "frequency",
+                "value": "",
+                "type": "query",
+                "description": "Frequency of the data."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "",
+                "type": "query",
+                "description": "Output file format."
+              }
+            ]
+          },
+          "docs": "Retrieve observations (data values) for an economic data series. Supports date filtering, sorting, and multiple output formats."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

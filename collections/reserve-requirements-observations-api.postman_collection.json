@@ -1,0 +1,308 @@
+{
+  "item": [
+    {
+      "id": "ac9a70e9-8112-40e8-96c8-abb4a610bf00",
+      "name": "Observations",
+      "description": {
+        "content": "Retrieve data observations for a series.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4ee6e134-3a15-49cc-b1f9-b4e6c222ed5f",
+          "name": "Get Series Observations",
+          "request": {
+            "name": "Get Series Observations",
+            "description": {
+              "content": "Retrieve observations (data values) for an economic data series. Supports date filtering, sorting, and multiple output formats.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "series",
+                "observations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "series_id",
+                  "value": "<string>",
+                  "description": "(Required) The FRED series ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "observation_start",
+                  "value": "<date>",
+                  "description": "Start date for observations (YYYY-MM-DD)."
+                },
+                {
+                  "disabled": false,
+                  "key": "observation_end",
+                  "value": "<date>",
+                  "description": "End date for observations (YYYY-MM-DD)."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_order",
+                  "value": "asc",
+                  "description": "Sort order for observations."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100000",
+                  "description": "Maximum number of observations to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Offset for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "units",
+                  "value": "<string>",
+                  "description": "Units transformation for the data."
+                },
+                {
+                  "disabled": false,
+                  "key": "frequency",
+                  "value": "<string>",
+                  "description": "Frequency of the data."
+                },
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your FRED API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "file_type",
+                  "value": "json",
+                  "description": "Output file format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "87c1e353-fac6-4f71-a2af-7025b28f3bda",
+              "name": "Series observations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "series",
+                    "observations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "series_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "observation_start",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "observation_end",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "units",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "frequency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "file_type",
+                      "value": "json"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"realtime_start\": \"string\",\n  \"realtime_end\": \"string\",\n  \"observation_start\": \"string\",\n  \"observation_end\": \"string\",\n  \"units\": \"string\",\n  \"output_type\": 9023,\n  \"file_type\": \"string\",\n  \"order_by\": \"string\",\n  \"sort_order\": \"string\",\n  \"count\": 230,\n  \"offset\": 7573,\n  \"limit\": 2534,\n  \"observations\": [\n    {\n      \"realtime_start\": \"1962-12-30\",\n      \"realtime_end\": \"1990-04-26\",\n      \"date\": \"1974-11-14\",\n      \"value\": \"string\"\n    },\n    {\n      \"realtime_start\": \"2008-04-08\",\n      \"realtime_end\": \"1961-12-05\",\n      \"date\": \"1985-06-05\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ca2f305-9ea2-41a5-878d-ff687a97ed35",
+              "name": "Bad request - invalid parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "series",
+                    "observations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "series_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "observation_start",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "observation_end",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "units",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "frequency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "file_type",
+                      "value": "json"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 665,\n  \"error_message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.stlouisfed.org/fred",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f0a9975f-6cfd-4da1-b92f-566a7900011d",
+    "name": "FRED API - Federal Reserve Economic Data Categories Observations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Federal Reserve Economic Data (FRED) API provided by the Federal Reserve Bank of St. Louis offers programmatic access to over 800,000 economic time series including reserve requirement data, monetary base measures, H.6 Money Stock Measures, and historical aggregate reserve data from the discontinued H.3 release. The API uses API key authentication and returns data in JSON, XML, or other formats.\n\nContact Support:\n Name: Federal Reserve Bank of St. Louis",
+      "type": "text/plain"
+    }
+  }
+}

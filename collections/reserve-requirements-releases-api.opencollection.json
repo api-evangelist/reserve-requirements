@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FRED API - Federal Reserve Economic Data Categories Releases API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Releases",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Releases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/fred/releases",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset for pagination."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "",
+                "type": "query",
+                "description": "Output file format."
+              }
+            ]
+          },
+          "docs": "Retrieve all Federal Reserve statistical releases."
+        },
+        {
+          "info": {
+            "name": "Get Release",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/fred/release",
+            "params": [
+              {
+                "name": "release_id",
+                "value": "",
+                "type": "query",
+                "description": "The release ID."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "",
+                "type": "query",
+                "description": "Output file format."
+              }
+            ]
+          },
+          "docs": "Retrieve a specific Federal Reserve statistical release."
+        },
+        {
+          "info": {
+            "name": "Get Release Series",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/fred/release/series",
+            "params": [
+              {
+                "name": "release_id",
+                "value": "",
+                "type": "query",
+                "description": "The release ID."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "",
+                "type": "query",
+                "description": "Output file format."
+              }
+            ]
+          },
+          "docs": "Retrieve all series for a statistical release."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

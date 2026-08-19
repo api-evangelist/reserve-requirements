@@ -1,0 +1,112 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FRED API - Federal Reserve Economic Data Categories Series API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Series",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Economic Series",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/fred/series",
+            "params": [
+              {
+                "name": "series_id",
+                "value": "",
+                "type": "query",
+                "description": "The FRED series ID (e.g., RESBALNS, BOGMBASE)."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "",
+                "type": "query",
+                "description": "Output file format."
+              }
+            ]
+          },
+          "docs": "Retrieve information for a single FRED economic data series. Key reserve-related series include: RESBALNS (reserve balances), BOGMBASE (monetary base), WRESBAL (weekly reserve balances)."
+        },
+        {
+          "info": {
+            "name": "Search Series",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/fred/series/search",
+            "params": [
+              {
+                "name": "search_text",
+                "value": "",
+                "type": "query",
+                "description": "Search keywords (e.g., \"reserve requirements\", \"monetary base\")."
+              },
+              {
+                "name": "search_type",
+                "value": "",
+                "type": "query",
+                "description": "Type of search to perform."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset for pagination."
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Field to order results by."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "",
+                "type": "query",
+                "description": "Output file format."
+              }
+            ]
+          },
+          "docs": "Search for FRED economic data series by keyword."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,100 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FRED API - Federal Reserve Economic Data Categories API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Categories",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Category",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/fred/category",
+            "params": [
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "query",
+                "description": "The category ID (e.g., 32217 for Reserve Requirements)."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "",
+                "type": "query",
+                "description": "Output file format."
+              }
+            ]
+          },
+          "docs": "Retrieve a FRED category by ID."
+        },
+        {
+          "info": {
+            "name": "Get Category Series",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.stlouisfed.org/fred/category/series",
+            "params": [
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "query",
+                "description": "The category ID."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset for pagination."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your FRED API key."
+              },
+              {
+                "name": "file_type",
+                "value": "",
+                "type": "query",
+                "description": "Output file format."
+              }
+            ]
+          },
+          "docs": "Retrieve all series for a FRED category."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

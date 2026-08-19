@@ -1,0 +1,389 @@
+{
+  "item": [
+    {
+      "id": "82d64b40-df85-49a7-87bb-d20ccf386ea3",
+      "name": "Releases",
+      "description": {
+        "content": "Access Federal Reserve statistical releases.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9ffa2e3f-804b-4245-b736-22c1f3f65a8a",
+          "name": "List Releases",
+          "request": {
+            "name": "List Releases",
+            "description": {
+              "content": "Retrieve all Federal Reserve statistical releases.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "releases"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "1000",
+                  "description": "Maximum number of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Offset for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your FRED API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "file_type",
+                  "value": "json",
+                  "description": "Output file format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e1dd14e4-a80c-4db4-a6ec-dbef8cd98fe6",
+              "name": "List of releases.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "releases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "file_type",
+                      "value": "json"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"realtime_start\": \"string\",\n  \"realtime_end\": \"string\",\n  \"order_by\": \"string\",\n  \"sort_order\": \"string\",\n  \"count\": 7851,\n  \"offset\": 4887,\n  \"limit\": 426,\n  \"releases\": [\n    {\n      \"id\": 4729,\n      \"realtime_start\": \"string\",\n      \"realtime_end\": \"string\",\n      \"name\": \"string\",\n      \"press_release\": false,\n      \"link\": \"https://GyxCMVxaqhkJbiIzJTOPfyb.sqpUSl7jqdE\"\n    },\n    {\n      \"id\": 6496,\n      \"realtime_start\": \"string\",\n      \"realtime_end\": \"string\",\n      \"name\": \"string\",\n      \"press_release\": false,\n      \"link\": \"http://EtpIaaU.gqxzUsKKvEJbA5sefR6w8rhWXZSThlB\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e5159453-a3ba-4abd-b862-878697ea2118",
+          "name": "Get Release",
+          "request": {
+            "name": "Get Release",
+            "description": {
+              "content": "Retrieve a specific Federal Reserve statistical release.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "release"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "release_id",
+                  "value": "<integer>",
+                  "description": "(Required) The release ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your FRED API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "file_type",
+                  "value": "json",
+                  "description": "Output file format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0a606ab8-5a18-4787-9e04-08b3f5632aac",
+              "name": "Release metadata.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "release"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "release_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "file_type",
+                      "value": "json"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"releases\": [\n    {\n      \"id\": 7762,\n      \"realtime_start\": \"string\",\n      \"realtime_end\": \"string\",\n      \"name\": \"string\",\n      \"press_release\": true,\n      \"link\": \"http://JxFcVUnFOqtLHkHPhKhbYSrF.ozmsnKPC1ljMnpT6jRtiyF7CFcxP48CarNbMqUzgE\"\n    },\n    {\n      \"id\": 3875,\n      \"realtime_start\": \"string\",\n      \"realtime_end\": \"string\",\n      \"name\": \"string\",\n      \"press_release\": true,\n      \"link\": \"http://oPiEezsyVSzcgjVMmQjJZjVGjJK.dvcnGasiJ7VWZHYjX8IZ1,wThi-2QTbOmUjd7fOJqg7cFxU4ZU7vgpbzHi.V\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cec73ca5-382e-4895-b3c7-f8dd80e3693c",
+          "name": "Get Release Series",
+          "request": {
+            "name": "Get Release Series",
+            "description": {
+              "content": "Retrieve all series for a statistical release.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "release",
+                "series"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "release_id",
+                  "value": "<integer>",
+                  "description": "(Required) The release ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "1000",
+                  "description": "Maximum number of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your FRED API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "file_type",
+                  "value": "json",
+                  "description": "Output file format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c9409c01-e8c8-45c8-ac5a-4d83afbc4d15",
+              "name": "Series for the release.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "release",
+                    "series"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "release_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "file_type",
+                      "value": "json"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"realtime_start\": \"string\",\n  \"realtime_end\": \"string\",\n  \"order_by\": \"string\",\n  \"sort_order\": \"string\",\n  \"count\": 8601,\n  \"offset\": 7104,\n  \"limit\": 4860,\n  \"seriess\": [\n    {\n      \"id\": \"string\",\n      \"realtime_start\": \"1948-07-11\",\n      \"realtime_end\": \"1996-05-05\",\n      \"title\": \"string\",\n      \"observation_start\": \"1991-01-04\",\n      \"observation_end\": \"1961-04-14\",\n      \"frequency\": \"string\",\n      \"frequency_short\": \"string\",\n      \"units\": \"string\",\n      \"units_short\": \"string\",\n      \"seasonal_adjustment\": \"string\",\n      \"seasonal_adjustment_short\": \"string\",\n      \"last_updated\": \"2021-04-16T21:43:30.793Z\",\n      \"popularity\": 9952,\n      \"notes\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"realtime_start\": \"1997-03-01\",\n      \"realtime_end\": \"2009-04-29\",\n      \"title\": \"string\",\n      \"observation_start\": \"1949-03-07\",\n      \"observation_end\": \"2024-09-12\",\n      \"frequency\": \"string\",\n      \"frequency_short\": \"string\",\n      \"units\": \"string\",\n      \"units_short\": \"string\",\n      \"seasonal_adjustment\": \"string\",\n      \"seasonal_adjustment_short\": \"string\",\n      \"last_updated\": \"1954-07-10T19:15:10.799Z\",\n      \"popularity\": 5946,\n      \"notes\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.stlouisfed.org/fred",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d11c3bd0-28eb-4337-96b4-e0d70fecb005",
+    "name": "FRED API - Federal Reserve Economic Data Categories Releases API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Federal Reserve Economic Data (FRED) API provided by the Federal Reserve Bank of St. Louis offers programmatic access to over 800,000 economic time series including reserve requirement data, monetary base measures, H.6 Money Stock Measures, and historical aggregate reserve data from the discontinued H.3 release. The API uses API key authentication and returns data in JSON, XML, or other formats.\n\nContact Support:\n Name: Federal Reserve Bank of St. Louis",
+      "type": "text/plain"
+    }
+  }
+}
