@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: FRED API - Federal Reserve Economic Data Categories Releases API
   version: 1.0.0
@@ -103,27 +103,13 @@ paths:
                 $ref: '#/components/schemas/SeriesSearchResponse'
 components:
   schemas:
-    SeriesSearchResponse:
+    ReleaseResponse:
       type: object
       properties:
-        realtime_start:
-          type: string
-        realtime_end:
-          type: string
-        order_by:
-          type: string
-        sort_order:
-          type: string
-        count:
-          type: integer
-        offset:
-          type: integer
-        limit:
-          type: integer
-        seriess:
+        releases:
           type: array
           items:
-            $ref: '#/components/schemas/Series'
+            $ref: '#/components/schemas/Release'
     Release:
       type: object
       properties:
@@ -160,13 +146,6 @@ components:
           type: integer
         limit:
           type: integer
-        releases:
-          type: array
-          items:
-            $ref: '#/components/schemas/Release'
-    ReleaseResponse:
-      type: object
-      properties:
         releases:
           type: array
           items:
@@ -224,14 +203,28 @@ components:
         notes:
           type: string
           description: Series notes and descriptions.
+    SeriesSearchResponse:
+      type: object
+      properties:
+        realtime_start:
+          type: string
+        realtime_end:
+          type: string
+        order_by:
+          type: string
+        sort_order:
+          type: string
+        count:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        seriess:
+          type: array
+          items:
+            $ref: '#/components/schemas/Series'
   parameters:
-    apiKeyParam:
-      name: api_key
-      in: query
-      required: true
-      schema:
-        type: string
-      description: Your FRED API key.
     fileTypeParam:
       name: file_type
       in: query
@@ -242,6 +235,13 @@ components:
         - xml
         default: json
       description: Output file format.
+    apiKeyParam:
+      name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your FRED API key.
   securitySchemes:
     apiKeyQuery:
       type: apiKey

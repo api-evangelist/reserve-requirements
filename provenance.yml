@@ -57,18 +57,21 @@ artifacts:
   json-structure/fred-series-structure.json:
     method: unknown
     evidence: no authorship recorded
+  openapi/_original/fred-openapi.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
   openapi/reserve-requirements-categories-api-openapi.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/reserve-requirements-observations-api-openapi.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/reserve-requirements-releases-api-openapi.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/reserve-requirements-series-api-openapi.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   plans/reserve-requirements-plans-pricing.yml:
     method: generated
     evidence: declared in the artifact
