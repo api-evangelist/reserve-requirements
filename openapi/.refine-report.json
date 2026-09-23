@@ -1,10 +1,7 @@
 {
   "provider": "reserve-requirements",
   "sources": [
-    "reserve-requirements-categories-api-openapi.yml",
-    "reserve-requirements-observations-api-openapi.yml",
-    "reserve-requirements-releases-api-openapi.yml",
-    "reserve-requirements-series-api-openapi.yml"
+    "_original/fred-openapi.yml"
   ],
   "outputs": [
     "reserve-requirements-categories-api-openapi.yml",
@@ -16,11 +13,14 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "reserve-requirements-categories-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "reserve-requirements-observations-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "reserve-requirements-releases-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "reserve-requirements-series-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "fred-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "reserve-requirements-categories-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reserve-requirements-observations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reserve-requirements-releases-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reserve-requirements-series-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

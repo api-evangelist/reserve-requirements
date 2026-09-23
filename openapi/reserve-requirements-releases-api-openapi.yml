@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: FRED API - Federal Reserve Economic Data Categories Releases API
+  title: FRED API - Federal Reserve Economic Data Releases API
   version: 1.0.0
   description: The Federal Reserve Economic Data (FRED) API provided by the Federal Reserve Bank of St. Louis offers programmatic access to over 800,000 economic time series including reserve requirement data, monetary base measures, H.6 Money Stock Measures, and historical aggregate reserve data from the discontinued H.3 release. The API uses API key authentication and returns data in JSON, XML, or other formats.
   contact:
@@ -103,32 +103,6 @@ paths:
                 $ref: '#/components/schemas/SeriesSearchResponse'
 components:
   schemas:
-    ReleaseResponse:
-      type: object
-      properties:
-        releases:
-          type: array
-          items:
-            $ref: '#/components/schemas/Release'
-    Release:
-      type: object
-      properties:
-        id:
-          type: integer
-        realtime_start:
-          type: string
-        realtime_end:
-          type: string
-        name:
-          type: string
-          description: Release name.
-        press_release:
-          type: boolean
-          description: Whether this is a press release.
-        link:
-          type: string
-          format: uri
-          description: Link to the release page.
     ReleasesResponse:
       type: object
       properties:
@@ -203,6 +177,25 @@ components:
         notes:
           type: string
           description: Series notes and descriptions.
+    Release:
+      type: object
+      properties:
+        id:
+          type: integer
+        realtime_start:
+          type: string
+        realtime_end:
+          type: string
+        name:
+          type: string
+          description: Release name.
+        press_release:
+          type: boolean
+          description: Whether this is a press release.
+        link:
+          type: string
+          format: uri
+          description: Link to the release page.
     SeriesSearchResponse:
       type: object
       properties:
@@ -224,7 +217,21 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Series'
+    ReleaseResponse:
+      type: object
+      properties:
+        releases:
+          type: array
+          items:
+            $ref: '#/components/schemas/Release'
   parameters:
+    apiKeyParam:
+      name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your FRED API key.
     fileTypeParam:
       name: file_type
       in: query
@@ -235,13 +242,6 @@ components:
         - xml
         default: json
       description: Output file format.
-    apiKeyParam:
-      name: api_key
-      in: query
-      required: true
-      schema:
-        type: string
-      description: Your FRED API key.
   securitySchemes:
     apiKeyQuery:
       type: apiKey

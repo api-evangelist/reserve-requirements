@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: FRED API - Federal Reserve Economic Data Categories Observations API
+  title: FRED API - Federal Reserve Economic Data Observations API
   version: 1.0.0
   description: The Federal Reserve Economic Data (FRED) API provided by the Federal Reserve Bank of St. Louis offers programmatic access to over 800,000 economic time series including reserve requirement data, monetary base measures, H.6 Money Stock Measures, and historical aggregate reserve data from the discontinued H.3 release. The API uses API key authentication and returns data in JSON, XML, or other formats.
   contact:
@@ -115,32 +115,14 @@ paths:
         '400':
           $ref: '#/components/responses/BadRequest'
 components:
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    Observation:
-      type: object
-      properties:
-        realtime_start:
-          type: string
-          format: date
-        realtime_end:
-          type: string
-          format: date
-        date:
-          type: string
-          format: date
-          description: Observation date.
-        value:
-          type: string
-          description: Observation value (period value or "." for missing).
-    ErrorResponse:
-      type: object
-      properties:
-        error_code:
-          type: integer
-          description: FRED error code.
-        error_message:
-          type: string
-          description: Human-readable error message.
     ObservationsResponse:
       type: object
       properties:
@@ -172,7 +154,39 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Observation'
+    Observation:
+      type: object
+      properties:
+        realtime_start:
+          type: string
+          format: date
+        realtime_end:
+          type: string
+          format: date
+        date:
+          type: string
+          format: date
+          description: Observation date.
+        value:
+          type: string
+          description: Observation value (period value or "." for missing).
+    ErrorResponse:
+      type: object
+      properties:
+        error_code:
+          type: integer
+          description: FRED error code.
+        error_message:
+          type: string
+          description: Human-readable error message.
   parameters:
+    apiKeyParam:
+      name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your FRED API key.
     fileTypeParam:
       name: file_type
       in: query
@@ -183,20 +197,6 @@ components:
         - xml
         default: json
       description: Output file format.
-    apiKeyParam:
-      name: api_key
-      in: query
-      required: true
-      schema:
-        type: string
-      description: Your FRED API key.
-  responses:
-    BadRequest:
-      description: Bad request - invalid parameters.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     apiKeyQuery:
       type: apiKey
