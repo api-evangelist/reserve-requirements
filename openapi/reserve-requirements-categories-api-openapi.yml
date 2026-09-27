@@ -78,7 +78,53 @@ paths:
               schema:
                 $ref: '#/components/schemas/SeriesSearchResponse'
 components:
+  parameters:
+    fileTypeParam:
+      name: file_type
+      in: query
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
+      description: Output file format.
+    apiKeyParam:
+      name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your FRED API key.
   schemas:
+    SeriesSearchResponse:
+      type: object
+      properties:
+        realtime_start:
+          type: string
+        realtime_end:
+          type: string
+        order_by:
+          type: string
+        sort_order:
+          type: string
+        count:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        seriess:
+          type: array
+          items:
+            $ref: '#/components/schemas/Series'
+    CategoryResponse:
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
     Category:
       type: object
       properties:
@@ -144,52 +190,6 @@ components:
         notes:
           type: string
           description: Series notes and descriptions.
-    CategoryResponse:
-      type: object
-      properties:
-        categories:
-          type: array
-          items:
-            $ref: '#/components/schemas/Category'
-    SeriesSearchResponse:
-      type: object
-      properties:
-        realtime_start:
-          type: string
-        realtime_end:
-          type: string
-        order_by:
-          type: string
-        sort_order:
-          type: string
-        count:
-          type: integer
-        offset:
-          type: integer
-        limit:
-          type: integer
-        seriess:
-          type: array
-          items:
-            $ref: '#/components/schemas/Series'
-  parameters:
-    apiKeyParam:
-      name: api_key
-      in: query
-      required: true
-      schema:
-        type: string
-      description: Your FRED API key.
-    fileTypeParam:
-      name: file_type
-      in: query
-      schema:
-        type: string
-        enum:
-        - json
-        - xml
-        default: json
-      description: Output file format.
   securitySchemes:
     apiKeyQuery:
       type: apiKey
