@@ -109,17 +109,6 @@ paths:
                 $ref: '#/components/schemas/SeriesSearchResponse'
 components:
   schemas:
-    SeriesResponse:
-      type: object
-      properties:
-        realtime_start:
-          type: string
-        realtime_end:
-          type: string
-        seriess:
-          type: array
-          items:
-            $ref: '#/components/schemas/Series'
     ErrorResponse:
       type: object
       properties:
@@ -203,7 +192,32 @@ components:
         notes:
           type: string
           description: Series notes and descriptions.
+    SeriesResponse:
+      type: object
+      properties:
+        realtime_start:
+          type: string
+        realtime_end:
+          type: string
+        seriess:
+          type: array
+          items:
+            $ref: '#/components/schemas/Series'
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
+    apiKeyParam:
+      name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your FRED API key.
     fileTypeParam:
       name: file_type
       in: query
@@ -214,20 +228,6 @@ components:
         - xml
         default: json
       description: Output file format.
-    apiKeyParam:
-      name: api_key
-      in: query
-      required: true
-      schema:
-        type: string
-      description: Your FRED API key.
-  responses:
-    BadRequest:
-      description: Bad request - invalid parameters.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     apiKeyQuery:
       type: apiKey

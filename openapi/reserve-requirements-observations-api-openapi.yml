@@ -116,6 +116,15 @@ paths:
           $ref: '#/components/responses/BadRequest'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error_code:
+          type: integer
+          description: FRED error code.
+        error_message:
+          type: string
+          description: Human-readable error message.
     Observation:
       type: object
       properties:
@@ -132,15 +141,6 @@ components:
         value:
           type: string
           description: Observation value (period value or "." for missing).
-    ErrorResponse:
-      type: object
-      properties:
-        error_code:
-          type: integer
-          description: FRED error code.
-        error_message:
-          type: string
-          description: Human-readable error message.
     ObservationsResponse:
       type: object
       properties:
@@ -172,7 +172,21 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Observation'
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
+    apiKeyParam:
+      name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your FRED API key.
     fileTypeParam:
       name: file_type
       in: query
@@ -183,20 +197,6 @@ components:
         - xml
         default: json
       description: Output file format.
-    apiKeyParam:
-      name: api_key
-      in: query
-      required: true
-      schema:
-        type: string
-      description: Your FRED API key.
-  responses:
-    BadRequest:
-      description: Bad request - invalid parameters.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     apiKeyQuery:
       type: apiKey

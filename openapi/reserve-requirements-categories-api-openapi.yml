@@ -78,25 +78,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/SeriesSearchResponse'
 components:
-  parameters:
-    fileTypeParam:
-      name: file_type
-      in: query
-      schema:
-        type: string
-        enum:
-        - json
-        - xml
-        default: json
-      description: Output file format.
-    apiKeyParam:
-      name: api_key
-      in: query
-      required: true
-      schema:
-        type: string
-      description: Your FRED API key.
   schemas:
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Category ID.
+        name:
+          type: string
+          description: Category name.
+        parent_id:
+          type: integer
+          description: Parent category ID.
     SeriesSearchResponse:
       type: object
       properties:
@@ -118,25 +112,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Series'
-    CategoryResponse:
-      type: object
-      properties:
-        categories:
-          type: array
-          items:
-            $ref: '#/components/schemas/Category'
-    Category:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Category ID.
-        name:
-          type: string
-          description: Category name.
-        parent_id:
-          type: integer
-          description: Parent category ID.
     Series:
       type: object
       properties:
@@ -190,6 +165,31 @@ components:
         notes:
           type: string
           description: Series notes and descriptions.
+    CategoryResponse:
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+  parameters:
+    apiKeyParam:
+      name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your FRED API key.
+    fileTypeParam:
+      name: file_type
+      in: query
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
+      description: Output file format.
   securitySchemes:
     apiKeyQuery:
       type: apiKey

@@ -103,27 +103,25 @@ paths:
                 $ref: '#/components/schemas/SeriesSearchResponse'
 components:
   schemas:
-    ReleasesResponse:
+    Release:
       type: object
       properties:
+        id:
+          type: integer
         realtime_start:
           type: string
         realtime_end:
           type: string
-        order_by:
+        name:
           type: string
-        sort_order:
+          description: Release name.
+        press_release:
+          type: boolean
+          description: Whether this is a press release.
+        link:
           type: string
-        count:
-          type: integer
-        offset:
-          type: integer
-        limit:
-          type: integer
-        releases:
-          type: array
-          items:
-            $ref: '#/components/schemas/Release'
+          format: uri
+          description: Link to the release page.
     ReleaseResponse:
       type: object
       properties:
@@ -152,25 +150,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Series'
-    Release:
-      type: object
-      properties:
-        id:
-          type: integer
-        realtime_start:
-          type: string
-        realtime_end:
-          type: string
-        name:
-          type: string
-          description: Release name.
-        press_release:
-          type: boolean
-          description: Whether this is a press release.
-        link:
-          type: string
-          format: uri
-          description: Link to the release page.
     Series:
       type: object
       properties:
@@ -224,7 +203,35 @@ components:
         notes:
           type: string
           description: Series notes and descriptions.
+    ReleasesResponse:
+      type: object
+      properties:
+        realtime_start:
+          type: string
+        realtime_end:
+          type: string
+        order_by:
+          type: string
+        sort_order:
+          type: string
+        count:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        releases:
+          type: array
+          items:
+            $ref: '#/components/schemas/Release'
   parameters:
+    apiKeyParam:
+      name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your FRED API key.
     fileTypeParam:
       name: file_type
       in: query
@@ -235,13 +242,6 @@ components:
         - xml
         default: json
       description: Output file format.
-    apiKeyParam:
-      name: api_key
-      in: query
-      required: true
-      schema:
-        type: string
-      description: Your FRED API key.
   securitySchemes:
     apiKeyQuery:
       type: apiKey
