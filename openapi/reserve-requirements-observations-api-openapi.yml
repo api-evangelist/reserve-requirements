@@ -115,16 +115,25 @@ paths:
         '400':
           $ref: '#/components/responses/BadRequest'
 components:
+  parameters:
+    fileTypeParam:
+      name: file_type
+      in: query
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
+      description: Output file format.
+    apiKeyParam:
+      name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your FRED API key.
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error_code:
-          type: integer
-          description: FRED error code.
-        error_message:
-          type: string
-          description: Human-readable error message.
     Observation:
       type: object
       properties:
@@ -141,6 +150,15 @@ components:
         value:
           type: string
           description: Observation value (period value or "." for missing).
+    ErrorResponse:
+      type: object
+      properties:
+        error_code:
+          type: integer
+          description: FRED error code.
+        error_message:
+          type: string
+          description: Human-readable error message.
     ObservationsResponse:
       type: object
       properties:
@@ -179,24 +197,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    apiKeyParam:
-      name: api_key
-      in: query
-      required: true
-      schema:
-        type: string
-      description: Your FRED API key.
-    fileTypeParam:
-      name: file_type
-      in: query
-      schema:
-        type: string
-        enum:
-        - json
-        - xml
-        default: json
-      description: Output file format.
   securitySchemes:
     apiKeyQuery:
       type: apiKey
