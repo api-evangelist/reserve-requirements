@@ -78,37 +78,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/SeriesSearchResponse'
 components:
-  parameters:
-    fileTypeParam:
-      name: file_type
-      in: query
-      schema:
-        type: string
-        enum:
-        - json
-        - xml
-        default: json
-      description: Output file format.
-    apiKeyParam:
-      name: api_key
-      in: query
-      required: true
-      schema:
-        type: string
-      description: Your FRED API key.
   schemas:
-    Category:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Category ID.
-        name:
-          type: string
-          description: Category name.
-        parent_id:
-          type: integer
-          description: Parent category ID.
     CategoryResponse:
       type: object
       properties:
@@ -116,27 +86,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Category'
-    SeriesSearchResponse:
-      type: object
-      properties:
-        realtime_start:
-          type: string
-        realtime_end:
-          type: string
-        order_by:
-          type: string
-        sort_order:
-          type: string
-        count:
-          type: integer
-        offset:
-          type: integer
-        limit:
-          type: integer
-        seriess:
-          type: array
-          items:
-            $ref: '#/components/schemas/Series'
     Series:
       type: object
       properties:
@@ -190,6 +139,57 @@ components:
         notes:
           type: string
           description: Series notes and descriptions.
+    SeriesSearchResponse:
+      type: object
+      properties:
+        realtime_start:
+          type: string
+        realtime_end:
+          type: string
+        order_by:
+          type: string
+        sort_order:
+          type: string
+        count:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        seriess:
+          type: array
+          items:
+            $ref: '#/components/schemas/Series'
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Category ID.
+        name:
+          type: string
+          description: Category name.
+        parent_id:
+          type: integer
+          description: Parent category ID.
+  parameters:
+    apiKeyParam:
+      name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your FRED API key.
+    fileTypeParam:
+      name: file_type
+      in: query
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
+      description: Output file format.
   securitySchemes:
     apiKeyQuery:
       type: apiKey

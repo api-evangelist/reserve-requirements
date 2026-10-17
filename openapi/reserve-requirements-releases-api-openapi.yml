@@ -225,6 +225,13 @@ components:
           items:
             $ref: '#/components/schemas/Release'
   parameters:
+    apiKeyParam:
+      name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your FRED API key.
     fileTypeParam:
       name: file_type
       in: query
@@ -235,13 +242,6 @@ components:
         - xml
         default: json
       description: Output file format.
-    apiKeyParam:
-      name: api_key
-      in: query
-      required: true
-      schema:
-        type: string
-      description: Your FRED API key.
   securitySchemes:
     apiKeyQuery:
       type: apiKey
